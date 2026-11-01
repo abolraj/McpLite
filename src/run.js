@@ -100,15 +100,15 @@ export async function run(root, stopOnError) {
   if (failed === 0) {
     process.stderr.write(
       `  ${c.green(sym.ok)} ${c.green(`${passed} passed`)}  ${c.gray(sym.dot)}  ` +
-        `${c.dim(`${results.length}/${tasks.length} tasks`)}  ${c.gray(sym.dot)}  ` +
-        `${c.dim(fmtMs(totalMs))}\n`
+      `${c.dim(`${results.length}/${tasks.length} tasks`)}  ${c.gray(sym.dot)}  ` +
+      `${c.dim(fmtMs(totalMs))}\n`
     );
   } else {
     process.stderr.write(
       `  ${c.green(sym.ok)} ${c.green(`${passed} passed`)}   ` +
-        `${c.red(sym.fail)} ${c.red(`${failed} failed`)}  ${c.gray(sym.dot)}  ` +
-        `${c.dim(`${results.length}/${tasks.length} tasks`)}  ${c.gray(sym.dot)}  ` +
-        `${c.dim(fmtMs(totalMs))}\n`
+      `${c.red(sym.fail)} ${c.red(`${failed} failed`)}  ${c.gray(sym.dot)}  ` +
+      `${c.dim(`${results.length}/${tasks.length} tasks`)}  ${c.gray(sym.dot)}  ` +
+      `${c.dim(fmtMs(totalMs))}\n`
     );
     for (const r of results.filter((x) => !x.ok)) {
       const name = r.label ? truncate(r.label, 40) : r.id;
@@ -119,7 +119,7 @@ export async function run(root, stopOnError) {
   }
   process.stderr.write(`  ${c.gray('📄')} ${c.dim(logsPath)}\n\n`);
 
-  // ── append log ─────────────────────────────────────────────────────────────
+  // ── write log (reset: only this run's results) ─────────────────────────────
   const log = {
     timestamp: String(Math.floor(Date.now() / 1000)),
     root,
@@ -128,15 +128,5 @@ export async function run(root, stopOnError) {
     results,
   };
 
-  let allLogs = [];
-  if (fs.existsSync(logsPath)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(logsPath, 'utf8'));
-      if (Array.isArray(parsed)) allLogs = parsed;
-    } catch {
-      // corrupt log → reset
-    }
-  }
-  allLogs.push(log);
-  fs.writeFileSync(logsPath, JSON.stringify(allLogs, null, 2));
+  fs.writeFileSync(logsPath, JSON.stringify([log], null, 2));
 }
