@@ -1,0 +1,31 @@
+{
+  "name": "mcplite",
+  "version": "0.1.0",
+  "description": "Local tool executor for AI-generated tasks",
+  "type": "module",
+  "bin": {
+    "mcplite": "./bin/mcplite.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "tool",
+    "executor",
+    "cli",
+    "agent",
+    "mcp"
+  ],
+  "dependencies": {
+    "fast-glob": "^3.3.2"
+  },
+  "license": "MIT"
+}
