@@ -1,5 +1,5 @@
 {
-  "name": "mcplite",
+  "name": "@abolweb/mcplite",
   "version": "0.1.0",
   "description": "Local tool executor for AI-generated tasks",
   "type": "module",
