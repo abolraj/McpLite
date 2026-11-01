@@ -26,7 +26,7 @@
 ## 📦 Install
 
 ```sh
-npm i -g mcplite      # or: pnpm add -g mcplite / npx mcplite
+npm i -g @abolweb/mcplite      # or: pnpm add -g mcplite / npx mcplite
 ```
 
 Requires **Node ≥ 18**. 🖥️ macOS, Linux, Windows (bash via WSL/Git Bash).
