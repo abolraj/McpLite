@@ -1,8 +1,11 @@
 {
   "name": "@abolweb/mcplite",
-  "version": "0.1.5",
+  "version": "0.2.5",
   "description": "Local tool executor for AI-generated tasks",
   "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
   "bin": {
     "mcplite": "./bin/mcplite.js"
   },
