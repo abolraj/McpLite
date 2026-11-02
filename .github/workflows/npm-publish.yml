@@ -12,36 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4          # ← installs pnpm
-        with:
-          version: 9                         # or omit if packageManager field exists
-
-      - uses: actions/setup-node@v4          # ← now cache: pnpm works
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - run: npm ci
+      - run: npm test
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm publish --access public --no-git-checks
+      - run: npm ci
+      - run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
